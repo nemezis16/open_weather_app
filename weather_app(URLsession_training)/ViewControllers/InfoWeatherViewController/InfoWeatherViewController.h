@@ -6,6 +6,6 @@
 //  Copyright © 2016 Roman Osadchuk. All rights reserved.
 //
 
-@interface InfoWeatherViewController : UIViewController  <MKMapViewDelegate,CLLocationManagerDelegate>
+@interface InfoWeatherViewController : UIViewController  <MKMapViewDelegate>
 
 @end

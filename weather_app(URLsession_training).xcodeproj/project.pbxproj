@@ -18,6 +18,9 @@
 		A3F3280A1C5A218100065C3D /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F328091C5A218100065C3D /* LocationViewController.m */; };
 		A3F3280C1C5A323B00065C3D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F3280B1C5A323B00065C3D /* CoreLocation.framework */; };
 		A3F3280F1C5BA6EE00065C3D /* DetailAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F3280E1C5BA6EE00065C3D /* DetailAnnotation.m */; };
+		A3F5B4CD1C6B2B93006CC0E9 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4CC1C6B2B93006CC0E9 /* LocationManager.m */; };
+		A3F5B4D11C6B5BD3006CC0E9 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4D01C6B5BD3006CC0E9 /* Utils.m */; };
+		A3F5B4D41C6B6233006CC0E9 /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -53,6 +56,12 @@
 		A3F3280B1C5A323B00065C3D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A3F3280D1C5BA6EE00065C3D /* DetailAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailAnnotation.h; path = ViewControllers/LocationViewController/DetailAnnotation/DetailAnnotation.h; sourceTree = "<group>"; };
 		A3F3280E1C5BA6EE00065C3D /* DetailAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailAnnotation.m; path = ViewControllers/LocationViewController/DetailAnnotation/DetailAnnotation.m; sourceTree = "<group>"; };
+		A3F5B4CB1C6B2B93006CC0E9 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = SupportingClasses/Managers/LocationManager/LocationManager.h; sourceTree = "<group>"; };
+		A3F5B4CC1C6B2B93006CC0E9 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = SupportingClasses/Managers/LocationManager/LocationManager.m; sourceTree = "<group>"; };
+		A3F5B4CF1C6B5BD3006CC0E9 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Application/Utils/Utils.h; sourceTree = "<group>"; };
+		A3F5B4D01C6B5BD3006CC0E9 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Application/Utils/Utils.m; sourceTree = "<group>"; };
+		A3F5B4D21C6B6233006CC0E9 /* LoaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoaderViewController.h; path = ViewControllers/LoaderViewController/LoaderViewController.h; sourceTree = "<group>"; };
+		A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoaderViewController.m; path = ViewControllers/LoaderViewController/LoaderViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +137,7 @@
 		A3F327F51C59195C00065C3D /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				A3F5B4CE1C6B4635006CC0E9 /* Utils */,
 				A3F327F71C5919C000065C3D /* Storyboards */,
 				A3F327F01C5917AB00065C3D /* AppDelegate */,
 				A3F327F61C59197700065C3D /* Resourses */,
@@ -163,6 +173,7 @@
 		A3F327F91C591A0800065C3D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A3F5B4CA1C6B2B61006CC0E9 /* LocationManager */,
 				A3F327F11C5917BF00065C3D /* SessionManager */,
 			);
 			name = Managers;
@@ -171,6 +182,7 @@
 		A3F327FA1C591A3600065C3D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A3F5B4D51C6B633F006CC0E9 /* LoaderViewController */,
 				A3F328071C5A213100065C3D /* LocationViewController */,
 				A3F327FC1C5923FE00065C3D /* InfoWeatherViewController */,
 			);
@@ -212,6 +224,33 @@
 				A3F3280E1C5BA6EE00065C3D /* DetailAnnotation.m */,
 			);
 			name = DetailAnnotation;
+			sourceTree = "<group>";
+		};
+		A3F5B4CA1C6B2B61006CC0E9 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4CB1C6B2B93006CC0E9 /* LocationManager.h */,
+				A3F5B4CC1C6B2B93006CC0E9 /* LocationManager.m */,
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
+		A3F5B4CE1C6B4635006CC0E9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4CF1C6B5BD3006CC0E9 /* Utils.h */,
+				A3F5B4D01C6B5BD3006CC0E9 /* Utils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		A3F5B4D51C6B633F006CC0E9 /* LoaderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4D21C6B6233006CC0E9 /* LoaderViewController.h */,
+				A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */,
+			);
+			name = LoaderViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,7 +326,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3F327DC1C58DFF000065C3D /* AppDelegate.m in Sources */,
+				A3F5B4CD1C6B2B93006CC0E9 /* LocationManager.m in Sources */,
 				A3F327F41C59193000065C3D /* SessionManager.m in Sources */,
+				A3F5B4D41C6B6233006CC0E9 /* LoaderViewController.m in Sources */,
+				A3F5B4D11C6B5BD3006CC0E9 /* Utils.m in Sources */,
 				A3F327FF1C59248600065C3D /* InfoWeatherViewController.m in Sources */,
 				A3F3280F1C5BA6EE00065C3D /* DetailAnnotation.m in Sources */,
 				A3F327D91C58DFF000065C3D /* main.m in Sources */,
@@ -444,6 +486,7 @@
 				A3F327ED1C58DFF000065C3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

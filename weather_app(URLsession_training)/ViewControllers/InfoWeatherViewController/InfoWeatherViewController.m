@@ -9,6 +9,7 @@
 #import "InfoWeatherViewController.h"
 #import "LocationViewController.h"
 #import "SessionManager.h"
+#import "LocationManager.h"
 
 @interface InfoWeatherViewController () 
 
@@ -17,13 +18,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIconImageView;
 @property (weak, nonatomic) IBOutlet UIButton *checkBoxButton;
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) SessionManager *sessionManager;
 
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic) CLLocationCoordinate2D userCoordinate;
 
 @property (assign, nonatomic) BOOL isUserLocation;
+@property (strong, nonatomic) LoaderViewController *loaderViewController;
 
 @end
 
@@ -35,7 +36,7 @@
 {
     [super viewDidLoad];
 
-    [self getUserLocation];
+    [self updateUserLocation];
 }
 
 #pragma mark - Accessors
@@ -74,7 +75,7 @@
 - (IBAction)userLocationButtonTapped:(id)sender
 {
     if (!self.isUserLocation) {
-        [self getUserLocation];
+        [self updateUserLocation];
         [self setNewCoordinate:self.userCoordinate];
     }
 }
@@ -104,23 +105,37 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    [self dismissLoader];
+    
     [self setNewCoordinate:userLocation.coordinate];
     self.userCoordinate = userLocation.coordinate;
     [self isUserLocation];
     
     self.mapView.showsUserLocation = NO;
-    [self.locationManager stopUpdatingLocation];
-    self.locationManager = nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
-    DLog(@"%@",[error localizedDescription]);
+    [Utils presentAlertControllerWithController:self title:@"Error" message:[error localizedDescription]];
 }
 
 #pragma mark - Private
 
 #pragma mark - LocationMethods
+
+- (void)updateUserLocation
+{
+    self.mapView.showsUserLocation = YES;
+    
+    [[LocationManager sharedManager] updateUserLocationWithCompletion:^(CLLocationCoordinate2D coordinate, NSError *error) {
+        if (error) {
+            [Utils presentAlertControllerWithController:self title:@"Error" message:[error localizedDescription]];
+        } else {
+            self.coordinate = coordinate;
+            [self presentLoader];
+        }
+    }];
+}
 
 - (NSURL *)linkForCoordinate:(CLLocationCoordinate2D)coordinate
 {
@@ -151,22 +166,11 @@
     return [NSURL URLWithString:link];
 }
 
-- (void)getUserLocation
-{
-    self.mapView.showsUserLocation = YES;
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-//    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-//    }
-}
-
 - (void)setNewCoordinate:(CLLocationCoordinate2D)coordinate
 {
     [self.mapView removeAnnotations:self.mapView.annotations];
     
-    MKCoordinateSpan span = {.latitudeDelta =  1.f, .longitudeDelta = 1.f};
+    MKCoordinateSpan span = {.latitudeDelta =  0.05f, .longitudeDelta = 0.05f};
     MKCoordinateRegion region = {coordinate, span};
     self.mapView.region = region;
     
@@ -195,7 +199,7 @@
             [strongSelf setValuesFromDictionary:dictionary];
         }
         if (error) {
-            DLog(@"%@",[error localizedDescription]);
+            [Utils presentAlertControllerWithController:self title:@"Error" message:[error localizedDescription]];
         }
     }];
 }
@@ -252,6 +256,22 @@
             DLog(@"Image did not recieved");
         }
     }];
+}
+
+#pragma mark - LoaderPresentation
+
+- (void)presentLoader
+{
+    if (!self.loaderViewController) {
+        self.loaderViewController = [LoaderViewController presentLoaderFromController:self animated:YES complition:nil];
+        self.loaderViewController.message = @"Wait...Loading";
+    }
+}
+
+- (void)dismissLoader
+{
+    [LoaderViewController dismissLoaderViewControllerFromController:self animated:YES complition:nil];
+    self.loaderViewController = nil;
 }
 
 @end

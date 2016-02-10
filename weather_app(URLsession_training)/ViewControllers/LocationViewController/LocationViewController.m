@@ -8,6 +8,7 @@
 
 #import "LocationViewController.h"
 #import "DetailAnnotation.h"
+#import "LocationManager.h"
 
 typedef void (^CompletionBlock)(CLLocationCoordinate2D sdsdsdfdf);
 

@@ -7,6 +7,7 @@
 //
 
 
+
 @interface DetailAnnotation : NSObject <MKAnnotation>
 
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
