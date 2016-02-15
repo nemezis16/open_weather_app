@@ -9,6 +9,7 @@
 #import "ForecastViewController.h"
 #import "ForecastTableViewCell.h"
 #import "SessionManager.h"
+#import "OpenWeatherConstants.h"
 
 @interface ForecastViewController ()
 
@@ -51,7 +52,7 @@
 - (void)loadImageFromLink:(NSString *)link toCell:(ForecastTableViewCell *)cell
 {
     if (link) {
-        NSString *linkToImageString = [[LINK_IMAGE_WEATHER stringByAppendingString:link]stringByAppendingString:@".png"];
+        NSString *linkToImageString = [[LinkImageWeather stringByAppendingString:link]stringByAppendingString:@".png"];
         NSURL *imageURL = [NSURL URLWithString:linkToImageString];
         
         [[SessionManager new] fetchDataFromURL:imageURL completion:^(NSData *data, NSError *error) {

@@ -28,6 +28,7 @@
 		A3F5B4F21C6DD348006CC0E9 /* ForecastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4F11C6DD348006CC0E9 /* ForecastTableViewCell.m */; };
 		A3F8CA361C6E0B2500228993 /* NSString+NSMutableAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8CA351C6E0B2500228993 /* NSString+NSMutableAttributedString.m */; };
 		A3F8CA3A1C70E8AB00228993 /* UIColor+AppColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */; };
+		A3F8CA3E1C71F4D300228993 /* NSDictionary+WeatherLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8CA3D1C71F4D300228993 /* NSDictionary+WeatherLink.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -83,6 +84,9 @@
 		A3F8CA351C6E0B2500228993 /* NSString+NSMutableAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSMutableAttributedString.m"; sourceTree = "<group>"; };
 		A3F8CA381C70E8AB00228993 /* UIColor+AppColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AppColor.h"; path = "SupportingClasses/Categories/UIColor+AppColor/UIColor+AppColor.h"; sourceTree = "<group>"; };
 		A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AppColor.m"; path = "SupportingClasses/Categories/UIColor+AppColor/UIColor+AppColor.m"; sourceTree = "<group>"; };
+		A3F8CA3C1C71F4D300228993 /* NSDictionary+WeatherLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+WeatherLink.h"; path = "SupportingClasses/Categories/NSDictionary+WeatherLink/NSDictionary+WeatherLink.h"; sourceTree = "<group>"; };
+		A3F8CA3D1C71F4D300228993 /* NSDictionary+WeatherLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+WeatherLink.m"; path = "SupportingClasses/Categories/NSDictionary+WeatherLink/NSDictionary+WeatherLink.m"; sourceTree = "<group>"; };
+		A3F8CA3F1C72075100228993 /* OpenWeatherConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenWeatherConstants.h; path = ViewControllers/InfoWeatherViewController/OpenWeatherConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +223,7 @@
 			children = (
 				A3F327FD1C59248600065C3D /* InfoWeatherViewController.h */,
 				A3F327FE1C59248600065C3D /* InfoWeatherViewController.m */,
+				A3F8CA3F1C72075100228993 /* OpenWeatherConstants.h */,
 			);
 			name = InfoWeatherViewController;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 		A3F5B4DA1C6C8D30006CC0E9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A3F8CA3B1C71F44A00228993 /* NSDictionary+WeatherLink */,
 				A3F8CA371C70E88100228993 /* UIColor+AppColor */,
 				A3F8CA331C6E0A9200228993 /* NSString+NSMutableAttributedSting */,
 				A3F5B4DE1C6C8DBF006CC0E9 /* NSDictionary+NoNull */,
@@ -359,6 +365,15 @@
 				A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */,
 			);
 			name = "UIColor+AppColor";
+			sourceTree = "<group>";
+		};
+		A3F8CA3B1C71F44A00228993 /* NSDictionary+WeatherLink */ = {
+			isa = PBXGroup;
+			children = (
+				A3F8CA3C1C71F4D300228993 /* NSDictionary+WeatherLink.h */,
+				A3F8CA3D1C71F4D300228993 /* NSDictionary+WeatherLink.m */,
+			);
+			name = "NSDictionary+WeatherLink";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,6 +458,7 @@
 				A3F5B4E71C6CDFBF006CC0E9 /* WeatherAppNavigationController.m in Sources */,
 				A3F5B4F21C6DD348006CC0E9 /* ForecastTableViewCell.m in Sources */,
 				A3F5B4D41C6B6233006CC0E9 /* LoaderViewController.m in Sources */,
+				A3F8CA3E1C71F4D300228993 /* NSDictionary+WeatherLink.m in Sources */,
 				A3F5B4D11C6B5BD3006CC0E9 /* Utils.m in Sources */,
 				A3F5B4D91C6C81D6006CC0E9 /* WeatherDescription.m in Sources */,
 				A3F327FF1C59248600065C3D /* InfoWeatherViewController.m in Sources */,

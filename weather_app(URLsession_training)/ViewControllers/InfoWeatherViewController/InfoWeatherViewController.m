@@ -13,10 +13,10 @@
 #import "WeatherDescription.h"
 #import "ForecastViewController.h"
 #import "NSString+NSMutableAttributedString.h"
+#import "NSDictionary+WeatherLink.h"
+#import "OpenWeatherConstants.h"
 
 @interface InfoWeatherViewController () 
-
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapContentHeight;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextView *weatherDescriptionTextView;
@@ -108,13 +108,6 @@
     return pin;
 }
 
-//- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
-//{
-//    if (fullyRendered) {
-//        [self showMapAnimated];
-//    }
-//}
-
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     [self dismissLoader];
@@ -152,15 +145,6 @@
     view.layer.shadowOffset = CGSizeMake(0, -10);
 }
 
-//- (void)showMapAnimated
-//{
-//    __weak typeof(self) weakSelf = self;
-//    [UIView animateWithDuration:0.3f animations:^{
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        strongSelf.mapContentHeight.constant = 400.f;
-//    }];
-//}
-
 #pragma mark - LocationMethods
 
 - (void)updateUserLocation
@@ -179,31 +163,22 @@
 
 - (NSURL *)linkForCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    NSString *link = LINK_COORDINATE_SEARCH_WEATHER;
+    NSString *linkPart = LinkCoordinateSearchWeather;
     
-    CGFloat latitude = coordinate.latitude;
-    CGFloat longitude = coordinate.longitude;
-    NSString *latitudeString = [NSString stringWithFormat:@"%.2f",latitude];
-    NSString *longitudeString = [NSString stringWithFormat:@"%.2f",longitude];
+    NSString *latKey = @"lat";
+    NSString *lonKey = @"lon";
+    NSString *appIdKey = @"appid";
     
-    NSInteger coordinateCounter = 0;
-    for (int i = 0; i < link.length; i++) {
-        NSString *character = [link substringWithRange:NSMakeRange(i, 1)];
-        
-        if ([character isEqualToString:@"}"]) {
-            coordinateCounter++;
-            switch (coordinateCounter) {
-                case 1:
-                    link = [link stringByReplacingCharactersInRange:NSMakeRange(i - 1, 2) withString:latitudeString];
-                    break;
-                case 2:
-                    link = [link stringByReplacingCharactersInRange:NSMakeRange(i - 1, 2) withString:longitudeString];
-                    break;
-            }
-        }
-    }
+    NSString *coordinateLatitudeString = [NSString stringWithFormat:@"%.2f",coordinate.latitude];
+    NSString *coordinateLongitudeString = [NSString stringWithFormat:@"%.2f",coordinate.longitude];
     
-    return [NSURL URLWithString:link];
+    NSDictionary *linkDictionary = @{latKey : coordinateLatitudeString,
+                                     lonKey : coordinateLongitudeString,
+                                     appIdKey : AppID};
+    
+    NSURL *link = [linkDictionary linkForDictionaryWithLinkPart:linkPart arrangementKeys:@[latKey,lonKey,appIdKey]];
+    
+    return link;
 }
 
 - (void)setNewCoordinate:(CLLocationCoordinate2D)coordinate
@@ -283,7 +258,7 @@
 {
     NSString *rawImageLink = self.weatherDescription.imageLink;
     if (rawImageLink) {
-        NSString *linkToImageString = [[LINK_IMAGE_WEATHER stringByAppendingString:rawImageLink]stringByAppendingString:@".png"];
+        NSString *linkToImageString = [[LinkImageWeather stringByAppendingString:rawImageLink]stringByAppendingString:@".png"];
         NSURL *imageURL = [NSURL URLWithString:linkToImageString];
         
         __weak typeof(self) weakSelf = self;

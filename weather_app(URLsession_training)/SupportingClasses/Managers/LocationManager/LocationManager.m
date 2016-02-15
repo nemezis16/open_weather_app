@@ -55,7 +55,6 @@ typedef void(^CompletionCoordinateBlock)(CLLocationCoordinate2D coordinate, NSEr
 - (void)updateUserLocationWithCompletion:(void (^)(CLLocationCoordinate2D, NSError *))completion
 {
     [self.locationManager startUpdatingLocation];
-    
     self.completionCoordinateBlock = completion;
 }
 

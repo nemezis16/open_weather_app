@@ -6,8 +6,6 @@
 //  Copyright © 2016 Roman Osadchuk. All rights reserved.
 //
 
-
-
 @interface DetailAnnotation : NSObject <MKAnnotation>
 
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
