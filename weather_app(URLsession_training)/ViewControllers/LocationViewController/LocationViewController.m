@@ -30,6 +30,14 @@ static NSString *const PinIdentifier = @"pin_identifier";
 
 #pragma mark - LifeCycle
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.title = @"Choose coordinate";
+    self.searchBar.tintColor = [UIColor whiteColor];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -42,12 +50,7 @@ static NSString *const PinIdentifier = @"pin_identifier";
     [super viewDidDisappear:animated];
     
     self.completionBlock(self.coordinate);
-    
-    if (self.willCloseMyController){
-        self.willCloseMyController(@"hello");
-    }
 }
-
 
 #pragma mark - Public
 
@@ -119,8 +122,8 @@ static NSString *const PinIdentifier = @"pin_identifier";
         [self.localSearch cancel];
     }
     
-    MKCoordinateSpan span = {.latitudeDelta =  10.f, .longitudeDelta = 10.f};
-    MKCoordinateRegion region = {self.coordinate, span};
+    MKCoordinateSpan span = MKCoordinateSpanMake(10.f, 10.f);
+    MKCoordinateRegion region = MKCoordinateRegionMake(self.coordinate, span);
     
     MKLocalSearchRequest *searchRequest = [MKLocalSearchRequest new];
     searchRequest.naturalLanguageQuery = searchString;

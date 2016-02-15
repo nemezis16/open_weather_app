@@ -21,6 +21,13 @@
 		A3F5B4CD1C6B2B93006CC0E9 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4CC1C6B2B93006CC0E9 /* LocationManager.m */; };
 		A3F5B4D11C6B5BD3006CC0E9 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4D01C6B5BD3006CC0E9 /* Utils.m */; };
 		A3F5B4D41C6B6233006CC0E9 /* LoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */; };
+		A3F5B4D91C6C81D6006CC0E9 /* WeatherDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4D81C6C81D6006CC0E9 /* WeatherDescription.m */; };
+		A3F5B4DD1C6C8DB0006CC0E9 /* NSDictionary+NoNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4DC1C6C8DB0006CC0E9 /* NSDictionary+NoNull.m */; };
+		A3F5B4E71C6CDFBF006CC0E9 /* WeatherAppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4E61C6CDFBF006CC0E9 /* WeatherAppNavigationController.m */; };
+		A3F5B4EE1C6DD25E006CC0E9 /* ForecastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4ED1C6DD25E006CC0E9 /* ForecastViewController.m */; };
+		A3F5B4F21C6DD348006CC0E9 /* ForecastTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F5B4F11C6DD348006CC0E9 /* ForecastTableViewCell.m */; };
+		A3F8CA361C6E0B2500228993 /* NSString+NSMutableAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8CA351C6E0B2500228993 /* NSString+NSMutableAttributedString.m */; };
+		A3F8CA3A1C70E8AB00228993 /* UIColor+AppColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -62,6 +69,20 @@
 		A3F5B4D01C6B5BD3006CC0E9 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Application/Utils/Utils.m; sourceTree = "<group>"; };
 		A3F5B4D21C6B6233006CC0E9 /* LoaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoaderViewController.h; path = ViewControllers/LoaderViewController/LoaderViewController.h; sourceTree = "<group>"; };
 		A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoaderViewController.m; path = ViewControllers/LoaderViewController/LoaderViewController.m; sourceTree = "<group>"; };
+		A3F5B4D71C6C81D6006CC0E9 /* WeatherDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherDescription.h; path = SupportingClasses/Models/WeatherDescription/WeatherDescription.h; sourceTree = "<group>"; };
+		A3F5B4D81C6C81D6006CC0E9 /* WeatherDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherDescription.m; path = SupportingClasses/Models/WeatherDescription/WeatherDescription.m; sourceTree = "<group>"; };
+		A3F5B4DB1C6C8DB0006CC0E9 /* NSDictionary+NoNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+NoNull.h"; path = "SupportingClasses/Categories/NSDictionary+NoNull/NSDictionary+NoNull.h"; sourceTree = "<group>"; };
+		A3F5B4DC1C6C8DB0006CC0E9 /* NSDictionary+NoNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+NoNull.m"; path = "SupportingClasses/Categories/NSDictionary+NoNull/NSDictionary+NoNull.m"; sourceTree = "<group>"; };
+		A3F5B4E51C6CDFBF006CC0E9 /* WeatherAppNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherAppNavigationController.h; path = ViewControllers/WeatherAppNavigationController/WeatherAppNavigationController.h; sourceTree = "<group>"; };
+		A3F5B4E61C6CDFBF006CC0E9 /* WeatherAppNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherAppNavigationController.m; path = ViewControllers/WeatherAppNavigationController/WeatherAppNavigationController.m; sourceTree = "<group>"; };
+		A3F5B4EC1C6DD25E006CC0E9 /* ForecastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForecastViewController.h; path = ViewControllers/ForecastViewController/ForecastViewController.h; sourceTree = "<group>"; };
+		A3F5B4ED1C6DD25E006CC0E9 /* ForecastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForecastViewController.m; path = ViewControllers/ForecastViewController/ForecastViewController.m; sourceTree = "<group>"; };
+		A3F5B4F01C6DD348006CC0E9 /* ForecastTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForecastTableViewCell.h; path = ViewControllers/ForecastViewController/ForecastTableViewCell/ForecastTableViewCell.h; sourceTree = "<group>"; };
+		A3F5B4F11C6DD348006CC0E9 /* ForecastTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForecastTableViewCell.m; path = ViewControllers/ForecastViewController/ForecastTableViewCell/ForecastTableViewCell.m; sourceTree = "<group>"; };
+		A3F8CA341C6E0B2500228993 /* NSString+NSMutableAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSMutableAttributedString.h"; sourceTree = "<group>"; };
+		A3F8CA351C6E0B2500228993 /* NSString+NSMutableAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSMutableAttributedString.m"; sourceTree = "<group>"; };
+		A3F8CA381C70E8AB00228993 /* UIColor+AppColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AppColor.h"; path = "SupportingClasses/Categories/UIColor+AppColor/UIColor+AppColor.h"; sourceTree = "<group>"; };
+		A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AppColor.m"; path = "SupportingClasses/Categories/UIColor+AppColor/UIColor+AppColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +186,8 @@
 		A3F327F81C5919EF00065C3D /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
+				A3F5B4DA1C6C8D30006CC0E9 /* Categories */,
+				A3F5B4D61C6C754A006CC0E9 /* Models */,
 				A3F327F91C591A0800065C3D /* Managers */,
 			);
 			name = SupportingClasses;
@@ -182,6 +205,8 @@
 		A3F327FA1C591A3600065C3D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A3F5B4EB1C6DD22A006CC0E9 /* ForecastViewController */,
+				A3F5B4E41C6CDF89006CC0E9 /* WeatherAppNavigationController */,
 				A3F5B4D51C6B633F006CC0E9 /* LoaderViewController */,
 				A3F328071C5A213100065C3D /* LocationViewController */,
 				A3F327FC1C5923FE00065C3D /* InfoWeatherViewController */,
@@ -251,6 +276,89 @@
 				A3F5B4D31C6B6233006CC0E9 /* LoaderViewController.m */,
 			);
 			name = LoaderViewController;
+			sourceTree = "<group>";
+		};
+		A3F5B4D61C6C754A006CC0E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4DF1C6C9806006CC0E9 /* WeatherDescription */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A3F5B4DA1C6C8D30006CC0E9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A3F8CA371C70E88100228993 /* UIColor+AppColor */,
+				A3F8CA331C6E0A9200228993 /* NSString+NSMutableAttributedSting */,
+				A3F5B4DE1C6C8DBF006CC0E9 /* NSDictionary+NoNull */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		A3F5B4DE1C6C8DBF006CC0E9 /* NSDictionary+NoNull */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4DB1C6C8DB0006CC0E9 /* NSDictionary+NoNull.h */,
+				A3F5B4DC1C6C8DB0006CC0E9 /* NSDictionary+NoNull.m */,
+			);
+			name = "NSDictionary+NoNull";
+			sourceTree = "<group>";
+		};
+		A3F5B4DF1C6C9806006CC0E9 /* WeatherDescription */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4D71C6C81D6006CC0E9 /* WeatherDescription.h */,
+				A3F5B4D81C6C81D6006CC0E9 /* WeatherDescription.m */,
+			);
+			name = WeatherDescription;
+			sourceTree = "<group>";
+		};
+		A3F5B4E41C6CDF89006CC0E9 /* WeatherAppNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4E51C6CDFBF006CC0E9 /* WeatherAppNavigationController.h */,
+				A3F5B4E61C6CDFBF006CC0E9 /* WeatherAppNavigationController.m */,
+			);
+			name = WeatherAppNavigationController;
+			sourceTree = "<group>";
+		};
+		A3F5B4EB1C6DD22A006CC0E9 /* ForecastViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4EF1C6DD30F006CC0E9 /* ForecastTableViewCell */,
+				A3F5B4EC1C6DD25E006CC0E9 /* ForecastViewController.h */,
+				A3F5B4ED1C6DD25E006CC0E9 /* ForecastViewController.m */,
+			);
+			name = ForecastViewController;
+			sourceTree = "<group>";
+		};
+		A3F5B4EF1C6DD30F006CC0E9 /* ForecastTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A3F5B4F01C6DD348006CC0E9 /* ForecastTableViewCell.h */,
+				A3F5B4F11C6DD348006CC0E9 /* ForecastTableViewCell.m */,
+			);
+			name = ForecastTableViewCell;
+			sourceTree = "<group>";
+		};
+		A3F8CA331C6E0A9200228993 /* NSString+NSMutableAttributedSting */ = {
+			isa = PBXGroup;
+			children = (
+				A3F8CA341C6E0B2500228993 /* NSString+NSMutableAttributedString.h */,
+				A3F8CA351C6E0B2500228993 /* NSString+NSMutableAttributedString.m */,
+			);
+			name = "NSString+NSMutableAttributedSting";
+			path = "SupportingClasses/Categories/NSString+NSMutableAttributedSting";
+			sourceTree = "<group>";
+		};
+		A3F8CA371C70E88100228993 /* UIColor+AppColor */ = {
+			isa = PBXGroup;
+			children = (
+				A3F8CA381C70E8AB00228993 /* UIColor+AppColor.h */,
+				A3F8CA391C70E8AB00228993 /* UIColor+AppColor.m */,
+			);
+			name = "UIColor+AppColor";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +433,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3F8CA361C6E0B2500228993 /* NSString+NSMutableAttributedString.m in Sources */,
 				A3F327DC1C58DFF000065C3D /* AppDelegate.m in Sources */,
+				A3F5B4EE1C6DD25E006CC0E9 /* ForecastViewController.m in Sources */,
+				A3F5B4DD1C6C8DB0006CC0E9 /* NSDictionary+NoNull.m in Sources */,
 				A3F5B4CD1C6B2B93006CC0E9 /* LocationManager.m in Sources */,
+				A3F8CA3A1C70E8AB00228993 /* UIColor+AppColor.m in Sources */,
 				A3F327F41C59193000065C3D /* SessionManager.m in Sources */,
+				A3F5B4E71C6CDFBF006CC0E9 /* WeatherAppNavigationController.m in Sources */,
+				A3F5B4F21C6DD348006CC0E9 /* ForecastTableViewCell.m in Sources */,
 				A3F5B4D41C6B6233006CC0E9 /* LoaderViewController.m in Sources */,
 				A3F5B4D11C6B5BD3006CC0E9 /* Utils.m in Sources */,
+				A3F5B4D91C6C81D6006CC0E9 /* WeatherDescription.m in Sources */,
 				A3F327FF1C59248600065C3D /* InfoWeatherViewController.m in Sources */,
 				A3F3280F1C5BA6EE00065C3D /* DetailAnnotation.m in Sources */,
 				A3F327D91C58DFF000065C3D /* main.m in Sources */,

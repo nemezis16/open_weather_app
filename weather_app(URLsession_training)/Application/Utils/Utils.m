@@ -23,4 +23,12 @@
     });
 }
 
++ (void)prepareShadowForView:(UIView *)view
+{
+    view.layer.shadowOffset = CGSizeMake(0, 1);
+    view.layer.shadowRadius = 10.f;
+    view.layer.shadowOpacity = 0.3f;
+    view.layer.masksToBounds = NO;
+}
+
 @end

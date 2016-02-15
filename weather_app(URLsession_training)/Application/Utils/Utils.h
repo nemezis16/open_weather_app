@@ -6,10 +6,10 @@
 //  Copyright © 2016 Roman Osadchuk. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface Utils : NSObject
 
 + (void)presentAlertControllerWithController:(UIViewController *)controller title:(NSString *)title message:(NSString *)message;
+
++ (void)prepareShadowForView:(UIView *)view;
 
 @end

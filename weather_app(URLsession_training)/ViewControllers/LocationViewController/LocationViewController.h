@@ -10,6 +10,4 @@
 
 - (void)pushControllerFromController:(UIViewController *)controller withCoordinate:(CLLocationCoordinate2D)coordinate completion:(void(^)(CLLocationCoordinate2D))completion;
 
-@property (copy, nonatomic) void (^willCloseMyController)(id data);
-
 @end

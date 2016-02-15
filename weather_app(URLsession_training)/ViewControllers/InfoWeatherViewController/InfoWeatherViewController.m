@@ -10,21 +10,27 @@
 #import "LocationViewController.h"
 #import "SessionManager.h"
 #import "LocationManager.h"
+#import "WeatherDescription.h"
+#import "ForecastViewController.h"
+#import "NSString+NSMutableAttributedString.h"
 
 @interface InfoWeatherViewController () 
+
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mapContentHeight;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextView *weatherDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIconImageView;
 @property (weak, nonatomic) IBOutlet UIButton *checkBoxButton;
-
-@property (strong, nonatomic) SessionManager *sessionManager;
+@property (weak, nonatomic) IBOutlet UIButton *forecastButton;
 
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic) CLLocationCoordinate2D userCoordinate;
-
 @property (assign, nonatomic) BOOL isUserLocation;
+
+@property (strong, nonatomic) SessionManager *sessionManager;
 @property (strong, nonatomic) LoaderViewController *loaderViewController;
+@property (strong, nonatomic) WeatherDescription *weatherDescription;
 
 @end
 
@@ -35,8 +41,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self updateUserLocation];
+    
+    self.coordinate = CLLocationCoordinate2DMake(1, 1);
+    [self isUserLocation];
+    [self prepareShadowForView:self.mapView];
+    
+    self.forecastButton.enabled = NO;
 }
 
 #pragma mark - Accessors
@@ -59,10 +69,6 @@
 {
     LocationViewController *locactionController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([LocationViewController class])];
     
-    locactionController.willCloseMyController = ^(id data) {
-        
-    };
-    
     __weak typeof(self) weakSelf = self;
     [locactionController pushControllerFromController:self withCoordinate:self.coordinate completion:^(CLLocationCoordinate2D returnedCoordinate) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -76,7 +82,6 @@
 {
     if (!self.isUserLocation) {
         [self updateUserLocation];
-        [self setNewCoordinate:self.userCoordinate];
     }
 }
 
@@ -103,6 +108,13 @@
     return pin;
 }
 
+//- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+//{
+//    if (fullyRendered) {
+//        [self showMapAnimated];
+//    }
+//}
+
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     [self dismissLoader];
@@ -120,6 +132,34 @@
 }
 
 #pragma mark - Private
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString *forecastControllerIdentifier = NSStringFromClass([ForecastViewController class]);
+    if ([segue.identifier isEqualToString:forecastControllerIdentifier]) {
+        ForecastViewController *forecastController = (ForecastViewController *)[segue destinationViewController];
+        forecastController.title = self.weatherDescription.place;
+        forecastController.forecastList = self.weatherDescription.forecastList;
+    }
+}
+
+#pragma mark - Appearance
+
+- (void)prepareShadowForView:(UIView *)view
+{
+    [Utils prepareShadowForView:view];
+    
+    view.layer.shadowOffset = CGSizeMake(0, -10);
+}
+
+//- (void)showMapAnimated
+//{
+//    __weak typeof(self) weakSelf = self;
+//    [UIView animateWithDuration:0.3f animations:^{
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        strongSelf.mapContentHeight.constant = 400.f;
+//    }];
+//}
 
 #pragma mark - LocationMethods
 
@@ -168,10 +208,11 @@
 
 - (void)setNewCoordinate:(CLLocationCoordinate2D)coordinate
 {
+    self.forecastButton.enabled = YES;
     [self.mapView removeAnnotations:self.mapView.annotations];
     
-    MKCoordinateSpan span = {.latitudeDelta =  0.05f, .longitudeDelta = 0.05f};
-    MKCoordinateRegion region = {coordinate, span};
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.05f, 0.05f);
+    MKCoordinateRegion region = MKCoordinateRegionMake(coordinate, span);
     self.mapView.region = region;
     
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
@@ -208,54 +249,55 @@
 
 - (void)setValuesFromDictionary:(NSDictionary *)dictionary
 {
-    [self setInfoTextFromDictionary:dictionary];
-    [self setImageFormDictionary:dictionary];
+     self.weatherDescription = [[WeatherDescription alloc]initWithDictionary:dictionary];
+    [self setWeatherDescription];
+    [self setImage];
 }
 
-- (void)setInfoTextFromDictionary:(NSDictionary *)dictionary
+- (void)setWeatherDescription
 {
-    NSString *cityName = dictionary[@"city"][@"name"];
-    NSDictionary *listDictionary = ((NSArray *)dictionary[@"list"]).firstObject;
-    CGFloat windSpeed = [listDictionary[@"wind"][@"speed"] floatValue];
-    NSString *date = listDictionary[@"dt_txt"];
-    CGFloat humidity = [listDictionary[@"main"][@"humidity"] floatValue];
-    CGFloat temperature = [listDictionary[@"main"][@"temp"] floatValue] - 273.15f;
-    
-    //[listDictionary valueForKey:@"main.temp"];
-   //способ обратится -  listDictionary[@"main.temp"];
-    
-    NSDictionary *weatherDict = ((NSArray *)listDictionary[@"weather"]).firstObject;
-    NSString *weatherDescrtiption = weatherDict[@"description"];
-    
-    NSString *preparedString = [NSString stringWithFormat:@"Place: %@\nDate: %@\nWeather: %@\nTemperature: %.2f\u00B0C\nHumidity: %.2f %%\nWind speed: %.2f m/s",cityName,date,weatherDescrtiption,temperature,humidity,windSpeed];
-    
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.weatherDescriptionTextView.text = preparedString;
+        
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]init];
+        NSMutableAttributedString *place = [@"Place: "titleStringAppendToString:self.weatherDescription.place];
+        NSMutableAttributedString *weather = [@"\nWeather: "titleStringAppendToString:self.weatherDescription.weather];
+        NSMutableAttributedString *date = [@"\nDate: "titleStringAppendToString:self.weatherDescription.date];
+        NSMutableAttributedString *humidity = [@"\nHumidity: "titleStringAppendToString:[NSString stringWithFormat:@"%@", self.weatherDescription.humidity]];
+        NSMutableAttributedString *windSpeed = [@"\nWindSpeed: "titleStringAppendToString:[NSString stringWithFormat:@"%@", self.weatherDescription.windSpeed]];
+        NSMutableAttributedString *temperature = [@"\nTemperature: "titleStringAppendToString:[NSString stringWithFormat:@"%@", self.weatherDescription.temperature]];
+        
+        [attributedText appendAttributedString:place];
+        [attributedText appendAttributedString:weather];
+        [attributedText appendAttributedString:temperature];
+        [attributedText appendAttributedString:date];
+        [attributedText appendAttributedString:humidity];
+        [attributedText appendAttributedString:windSpeed];
+        
+        strongSelf.weatherDescriptionTextView.attributedText = attributedText;
     });
 }
 
-- (void)setImageFormDictionary:(NSDictionary *)dictionary
+- (void)setImage
 {
-    NSDictionary *listDictionary = ((NSArray *)dictionary[@"list"]).firstObject;
-    NSDictionary *weatherDict = ((NSArray *)listDictionary[@"weather"]).firstObject;
-    NSString *weatherIcon = weatherDict[@"icon"];
-    
-    NSString *linkToImageString = [[LINK_IMAGE_WEATHER stringByAppendingString:weatherIcon]stringByAppendingString:@".png"];
-    NSURL *imageURL = [NSURL URLWithString:linkToImageString];
-    
-    __weak typeof(self) weakSelf = self;
-    [[SessionManager new] fetchDataFromURL:imageURL completion:^(NSData *data, NSError *error) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (data) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                strongSelf.weatherIconImageView.image = [UIImage imageWithData:data];
-            });
-        } else {
-            DLog(@"Image did not recieved");
-        }
-    }];
+    NSString *rawImageLink = self.weatherDescription.imageLink;
+    if (rawImageLink) {
+        NSString *linkToImageString = [[LINK_IMAGE_WEATHER stringByAppendingString:rawImageLink]stringByAppendingString:@".png"];
+        NSURL *imageURL = [NSURL URLWithString:linkToImageString];
+        
+        __weak typeof(self) weakSelf = self;
+        [[SessionManager new] fetchDataFromURL:imageURL completion:^(NSData *data, NSError *error) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (data) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    strongSelf.weatherIconImageView.image = [UIImage imageWithData:data];
+                });
+            } else {
+                DLog(@"Image did not recieved");
+            }
+        }];
+    }
 }
 
 #pragma mark - LoaderPresentation

@@ -6,8 +6,6 @@
 //  Copyright © 2016 Roman Osadchuk. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface LocationManager : NSObject <CLLocationManagerDelegate>
 
 @property (assign,nonatomic) CLLocationCoordinate2D lastUserLocationCoordinate;

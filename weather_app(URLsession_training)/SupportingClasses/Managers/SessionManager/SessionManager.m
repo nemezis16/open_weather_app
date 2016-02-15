@@ -26,16 +26,27 @@ typedef void (^ComplitionBlock)(NSData *, NSError *);
 {
     self = [super init];
     if (self) {
+        [self setSharedCache];
+        
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         self.session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
     }
     return self;
 }
 
-- (void)fetchDataFromURL:(NSURL *)url completion:(void (^)(NSData *, NSError *))completion
+- (void)fetchDataFromURL:(NSURL *)url completion:(ComplitionBlock)completion
 {
-    [[self.session dataTaskWithURL:url] resume];
-    self.complitionBlock = completion;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache]cachedResponseForRequest:request];
+    if (cachedResponse.data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(cachedResponse.data,nil);
+        });
+    } else {
+        [self.session dataTaskWithRequest:request];
+        self.complitionBlock = completion;
+    }
 }
 
 #pragma mark - NSURLSessionDataDelegate
@@ -58,5 +69,22 @@ typedef void (^ComplitionBlock)(NSData *, NSError *);
     self.complitionBlock(self.data,error);
     [session finishTasksAndInvalidate];
 }
+
+#pragma mark - Private
+
+- (void)setSharedCache
+{
+    static NSURLCache *cache = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSInteger memoryCapacity = 5 * 1024 * 1024;
+        NSInteger diskCapacity = 20 * 1024 * 1024;
+        cache = [[NSURLCache alloc]initWithMemoryCapacity:memoryCapacity diskCapacity:diskCapacity diskPath:nil];
+        [NSURLCache setSharedURLCache:cache];
+    });
+}
+
+
 
 @end
