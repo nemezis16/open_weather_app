@@ -6,7 +6,7 @@
 //  Copyright © 2016 Roman Osadchuk. All rights reserved.
 //
 
-@interface SessionManager : NSObject <NSURLSessionDataDelegate,NSURLSessionTaskDelegate>
+@interface SessionManager : NSObject <NSURLSessionDelegate>
 
 - (void)fetchDataFromURL:(NSURL *)url completion:(void(^)(NSData * data, NSError *error))completion;
 

@@ -122,8 +122,7 @@ static NSString *const PinIdentifier = @"pin_identifier";
         [self.localSearch cancel];
     }
     
-    MKCoordinateSpan span = MKCoordinateSpanMake(10.f, 10.f);
-    MKCoordinateRegion region = MKCoordinateRegionMake(self.coordinate, span);
+    MKCoordinateRegion region = MKCoordinateRegionForMapRect(MKMapRectWorld);
     
     MKLocalSearchRequest *searchRequest = [MKLocalSearchRequest new];
     searchRequest.naturalLanguageQuery = searchString;

@@ -44,7 +44,7 @@ typedef void (^ComplitionBlock)(NSData *, NSError *);
             completion(cachedResponse.data,nil);
         });
     } else {
-        [self.session dataTaskWithRequest:request];
+        [[self.session dataTaskWithRequest:request] resume];
         self.complitionBlock = completion;
     }
 }
@@ -84,7 +84,5 @@ typedef void (^ComplitionBlock)(NSData *, NSError *);
         [NSURLCache setSharedURLCache:cache];
     });
 }
-
-
 
 @end

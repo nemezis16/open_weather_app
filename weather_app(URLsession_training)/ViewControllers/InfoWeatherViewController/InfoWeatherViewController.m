@@ -215,7 +215,7 @@
             [strongSelf setValuesFromDictionary:dictionary];
         }
         if (error) {
-            [Utils presentAlertControllerWithController:self title:@"Error" message:[error localizedDescription]];
+            [Utils presentAlertControllerWithController:strongSelf title:@"Error" message:[error localizedDescription]];
         }
     }];
 }
